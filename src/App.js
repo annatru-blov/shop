@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import HeaderContainer from "./components/HeaderContainer";
+import Footer from "./components/Footer";
+import { useSelector } from 'react-redux';
 
-function App() {
+
+import ItemsContainer from "./components/ItemsContainer";
+import CategoriesContainer from "./components/CategoriesContainer";
+import ShowFullItem from "./components/ShowFullItem";
+import ShowFullItemContainer from "./components/ShowFullItemContainer";
+
+const App = () => {
+  const orders = useSelector((state) => state.itemPage.orders);
+  const showFullItem = useSelector((state) => state.itemPage.showFullItem);
+  const fullItem = useSelector((state) => state.itemPage.fullItem);
+  
+  
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="wrapper">
+      <HeaderContainer orders={orders}/>
+      <CategoriesContainer />
+      <ItemsContainer />
+{showFullItem && <ShowFullItemContainer item={fullItem}/>}
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;
